@@ -29,6 +29,10 @@ public class Vector3
     public double getZ() {
         return z;
     }
+    public Vector3 getAbs()
+    {
+        return new Vector3(Math.abs(x),Math.abs(y), Math.abs(z));
+    }
     
     
     public Vector3 add(Vector3 other)
@@ -37,7 +41,7 @@ public class Vector3
     }
     public Vector3 subtract(Vector3 other)
     {
-        return new Vector3(-other.x+this.x,-other.y+this.y,-other.z+this.z);
+        return new Vector3(this.x-other.x,this.y-other.y,this.z-other.z);
     }
     public double getMagnitude()
     {

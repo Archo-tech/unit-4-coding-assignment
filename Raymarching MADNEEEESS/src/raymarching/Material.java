@@ -13,12 +13,30 @@ import java.awt.Color;
 public class Material 
 {
     private Color color; 
-    public Material(Color color)
+    private double diffusion;
+    public Material(Color color, double dif)
     {
         this.color=color;
+        this.diffusion = dif;
     }
     public Color getColor()
     {
         return color;
+    }
+    public double getDiffusion()
+    {
+        return diffusion;
+    }
+    public double getHue()
+    {
+        float[] hsb = new float[3];
+        Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(),hsb);
+        return hsb[0];
+    }
+    public double getSaturation()
+    {
+        float[] hsb = new float[3];
+        Color.RGBtoHSB(color.getRed(), color.getGreen(), color.getBlue(),hsb);
+        return hsb[1];
     }
 }

@@ -17,7 +17,7 @@ public class Camera
     private final double RATIO = 1.6;
     public Camera()
     {
-        position = new Vector3(0,0,-20);
+        position = new Vector3(0,1,-40);
         up = new Vector3(0,1,0);
         direction = new Vector3(0,0,1);
     }
@@ -39,7 +39,7 @@ public class Camera
     }
     public Vector3 getRight()
     {
-        return direction.cross(up);
+        return up.cross(direction);
         
     }
     public void translate(Vector3 displacement)
