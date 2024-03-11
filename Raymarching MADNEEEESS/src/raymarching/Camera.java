@@ -34,7 +34,7 @@ public class Camera
         return up;
     }
 
-    public double getRATIO() {
+    public double getRatio() {
         return RATIO;
     }
     public Vector3 getRight()

@@ -33,10 +33,10 @@ public class RaymarchingPanel extends JPanel
         SDF box = new BoxSDF(new Vector3(8,1,3), new Material(Color.YELLOW, 0.4));
         
         scene = new UnionSDF(sphere,plane);
-        scene = new UnionSDF(scene, box);
+        scene = new UnionSDF(scene,box);
         backgroundMaterial = new Material(Color.BLUE,0);
         light = (new Vector3(8, -5, 1)).getNormalized();
-        ambientLight = 0.3;
+        ambientLight = 0.1;
         
     }
     public RaymarchingPanel()
@@ -44,18 +44,17 @@ public class RaymarchingPanel extends JPanel
         image = new BufferedImage(1920,1080,BufferedImage.TYPE_INT_RGB);
         generateScene();
     }
-    void renderScene()
+    public void renderScene()
     {
         for(int x = 0; x < image.getWidth();x++)
         {
             for(int y = 0; y < image.getHeight();y++)
             {
-                Vector3 ray = camera.getPosition().add(camera.getDirection());
+                Vector3 ray = camera.getDirection();
                 double xRatio = (x - image.getWidth()/2.0)/image.getWidth();
+                ray = ray.add(camera.getRight().getScaled(xRatio * camera.getRatio()));
                 double yRatio = -(y - image.getHeight()/2.0)/image.getHeight();
-                
-                ray = ray.add(camera.getRight().getScaled(xRatio));
-                ray = ray.add(camera.getRight().getScaled(yRatio));
+                ray = ray.add(camera.getUp().getScaled(yRatio));
                 Vector3 point = raymarch(camera.getPosition(),ray);
                 renderPixel(x,y,point);
             }
@@ -84,7 +83,7 @@ public class RaymarchingPanel extends JPanel
         else
         {
             Vector3 direction = light.getScaled(-1);
-            Vector3 sdfObj = raymarch(point.add(direction.getScaled(MIN_DISTANCE * 20)),light.getScaled(-1));
+            Vector3 sdfObj = raymarch(point.add(direction.getScaled(MIN_DISTANCE * 20)),direction);
             if(sdfObj != null)
             {
                 lightValue=0;
