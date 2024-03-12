@@ -28,6 +28,8 @@ public class RaymarchingPanel extends JPanel
     private final void generateScene()
     {
         camera = new Camera();
+        camera.translate(new Vector3(3,7,0));
+        camera.rotate(-30,0,0);
         SDF sphere = new SphereSDF(5, new Material(Color.RED,0.6));
         SDF plane = new PlaneSDF(new Vector3(0,1, 0), -2, new Material(Color.PINK, .6));
         SDF box = new BoxSDF(new Vector3(8,1,3), new Material(Color.YELLOW, 0.4));

@@ -46,5 +46,9 @@ public class Camera
     {
         position = position.add(displacement);
     }
-    
+    public void rotate(double x, double y, double z)
+    {
+        direction = direction.rotate(x,y,z);
+        up = up.rotate(x,y,z);
+    }
 }

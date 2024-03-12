@@ -89,5 +89,36 @@ public class Vector3
    {
        return "< "+x+", "+y+", "+z+" >";
    }
-    
+   public Vector3 rotateZ(double radians)
+   {
+       double newX = x * Math.cos(radians) + y * Math.sin(radians);
+       double newY = x * Math.sin(radians) + y * Math.cos(radians);
+       return new Vector3(newX, newY, z);
+   }
+   public Vector3 rotateY(double radians)
+   {
+       double newX = x * Math.cos(radians) + z * Math.sin(radians);
+       double newZ = -x * Math.sin(radians) + z * Math.cos(radians);
+       return new Vector3(newX, y, newZ);
+   }
+   public Vector3 rotateX(double radians)
+   {
+       double newY = y * Math.cos(radians) - z * Math.sin(radians);
+       double newZ = y * Math.sin(radians) + z * Math.cos(radians);
+       return new Vector3(x, newY, newZ);
+   }
+   
+   
+   
+   public Vector3 rotate(double x, double y, double z)
+   {
+       x = Math.toRadians(x);
+       y = Math.toRadians(y);
+       z = Math.toRadians(z);
+       Vector3 rotated = this.rotateX(x);
+       rotated = rotated.rotateY(y);
+       rotated = rotated.rotateZ(z);
+       return rotated;
+       
+   }
 }
