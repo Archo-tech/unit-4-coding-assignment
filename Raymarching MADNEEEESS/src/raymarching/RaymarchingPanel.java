@@ -29,13 +29,16 @@ public class RaymarchingPanel extends JPanel
     {
         camera = new Camera();
         camera.translate(new Vector3(3,7,0));
-        camera.rotate(-30,0,0);
+        camera.rotate(10,0,0);
         SDF sphere = new SphereSDF(5, new Material(Color.RED,0.6));
         SDF plane = new PlaneSDF(new Vector3(0,1, 0), -2, new Material(Color.PINK, .6));
         SDF box = new BoxSDF(new Vector3(8,1,3), new Material(Color.YELLOW, 0.4));
+        SDF octahedron = new OctahedronSDF(new Vector3(10,8,3), 7, new Material(Color.GREEN,.6));
+        scene = new SmoothUnionSDF(sphere, box, .4);
         
-        scene = new UnionSDF(sphere,plane);
+        scene = new UnionSDF(scene,plane);
         scene = new UnionSDF(scene,box);
+        scene = new SmoothUnionSDF(scene, octahedron,.5);
         backgroundMaterial = new Material(Color.BLUE,0);
         light = (new Vector3(8, -5, 1)).getNormalized();
         ambientLight = 0.1;
